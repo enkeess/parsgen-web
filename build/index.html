@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+	<link rel="manifest" href="./favicon/site.webmanifest">
+	<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+
+	<!--==================== UNICONS ====================-->
+	<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+
+	<!-- ==================== GOOGLE FONTS ==================== -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+	<!--==================== CSS ====================-->
+	<link rel="stylesheet" href="./css/style.min.css">
+
+	<title>Parsgen</title>
+
+</head>
+
+<body>
+	<!--==================== HEADER ====================-->
+	<header class="header" id="header">
+		<nav class="nav container">
+			<a href="#" class="nav__logo">Parsgen</a>
+
+			<div class="nav__menu" id="nav-menu">
+				<i class="uil uil-times nav__close" id="nav-close"></i>
+			</div>
+
+			<div class="nav__btns">
+				<!-- Theme change button -->
+				<i class="uil uil-moon change-theme" id="theme-button"></i>
+			</div>
+		</nav>
+	</header>
+
+	<!--==================== MAIN ====================-->
+	<main class="main">
+		<!--==================== Sandbox ====================-->
+		<section class="sandbox section" id="sandbox">
+			<h2 class="section__title">Sandbox</h2>
+			<span class="section__subtitle">Create your L-graph</span>
+			<div class="container" id="mainContainer">
+				<ul class="nav sandbox__nav">
+					<div class="dropdown">
+						<button  class="button dropdown__button">
+							<i class="uil uil-setting"></i>
+							<span>Graph</span>
+						</button>
+		
+						<ul class="dropdown__list hide">
+							<li>
+								<button type="button" class="button button_none" id="NewGraph">
+									<i class="uil uil-create-dashboard"></i>
+									<span>Create graph</span>
+								</button>
+							</li>
+		
+							<li class="divider"></li>
+		
+							<li>
+								<button type="button" class="button button_none" id="ExportGraph">
+									<i class="uil uil-export"></i>
+									<span>Export to file</span>
+								</button>
+							</li>
+		
+							<li>
+								<input type="file" id="ImportGraphFiles" accept=".json" style="display:none"
+									onchange="handelImportGraph(this.files)">
+								<button type="button" class="button button_none" id="ImportGraph">
+									<i class="uil uil-import"></i>
+									
+									<span>Import from file</span>
+								</button>
+							</li>
+		
+							<li class="divider"></li>
+		
+							<li>
+								<button type="button" class="button button_none" id="DownloadParser">
+									<i class="uil uil-arrow-to-bottom"></i>
+									<span>Download parser</span>
+								</button>
+							</li>
+		
+							<li class="divider"></li>
+		
+							<li>
+								<button type="button" class="button button_none" id="DeleteAll">
+									<i class="uil uil-trash-alt"></i>
+									<span>Remove all</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+		
+					<div class="dropdown">
+						<button type="button" class="button dropdown__button">
+							<i class="uil uil-search"></i>
+							<span>View</span>
+						</button>
+		
+						<ul class="dropdown__list hide" role="menu">
+							<li>
+								<button type="button" class="button button_none" id="Zoom100">
+									<i class="uil uil-search-plus"></i>
+									<span>100%</span>
+								</button>
+							</li>
+		
+							<li>
+								<button type="button" class="button button_none" id="Zoom50">
+									<i class="uil uil-search-plus"></i>
+									<span>50%</span>
+								</button>
+							</li>
+		
+							<li>
+								<button type="button" class="button button_none" id="Zoom25">
+									<i class="uil uil-search-plus"></i>
+									<span>25%</span>
+								</button>
+							</li>
+		
+							<li>
+								<button type="button" class="button button_none" id="ZoomFit">
+									<i class="uil uil-compress"></i>
+									<span>Zoom fit</span>
+								</button>
+							</li>
+		
+							<li class="divider"></li>
+		
+							<li>
+								<button type="button" class="button button_none" id="ZoomIn">
+									<i class="uil uil-search-plus"></i>
+									<span>Zoom in</span>
+								</button>
+							</li>
+		
+							<li>
+								<button type="button" class="button button_none" id="ZoomOut">
+									<i class="uil uil-search-minus"></i>
+									<span>Zoom out</span>
+								</button>
+							</li>
+		
+							<li class="divider"></li>
+		
+							<li>
+								<button type="button" class="button button_none" id="MoveWorspace">
+									<i class="uil uil-expand-arrows"></i>
+									<span>Move workspace</span>
+								</button>
+							</li>
+						</ul>
+					</div>
+		
+					<button type="button" class="button" id="Default">
+						<i class="uil uil-focus-add"></i>
+						<span>Default</span>
+					</button>
+		
+					<button type="button" class="button button_primary" id="AddGraph">
+						<i class="uil uil-plus"></i>
+						<span>Add vertex</span>
+					</button>
+		
+					<button type="button" class="button" id="ConnectGraphs">
+						<i class="uil uil-link-add"></i>
+						<span>Connect vertexes</span>
+					</button>
+		
+					<button type="button" class="button" id="DeleteObject">
+						<i class="uil uil-cancel"></i>
+						<span>Remove object</span>
+					</button>
+		
+					<button type="button" class="button" id="GraphUndo">
+						<i class="uil uil-corner-up-left-alt"></i>
+						<span>Undo</span>
+					</button>
+				</ul>
+		
+				<section>
+					<div id="message" class="alert alert-success" role="alert">Graph</div>
+				</section>
+		
+				<section  id="canvasSection">
+					<canvas id="canvas">Your browser is not supported</canvas>
+				</section>
+		
+				<div class="dialog hide" id="addEdge">
+					<div class="dialog__content">
+						<div class="dialog__header">
+							<div class="dialog__title">
+								<span>
+									Connect vertexes
+								</span>
+							</div>
+		
+							<button class="button dialog__close"></button>
+						</div>
+		
+						<div class="dialog__body">
+							<div class="dialog__main">
+								<form>
+									<fieldset class="dialog__fieldset contact__content" id="EdgeLabelControls">
+										<label id="EdgeLabel" for="edgeLable" class="contact__label"
+											aria-placeholder="enter your text">Label</label>
+										<input type="text" name="edgeLable" value="" id="EdgeLableInput" class="contact__input">
+									</fieldset>
+		
+									<fieldset class="dialog__fieldset contact__content" id="EdgeMarkControls">
+										<div class="">
+											<span class="contact__label">Mark Type</span>
+		
+											<div>
+												<input class="custom-checkbox" type="radio" name="MarkTypeValue"
+													id="RadiosMarkTypeNone" value="" checked>
+												<label for="RadiosMarkTypeNone">
+													NONE </label>
+											</div>
+		
+											<div>
+												<input class="custom-checkbox" type="radio" name="MarkTypeValue"
+													id="RadiosMarkTypeOpen" value="(">
+												<label for="RadiosMarkTypeOpen">
+													OPEN </label>
+											</div>
+											<div>
+												<input class="custom-checkbox" type="radio" name="MarkTypeValue"
+													id="RadiosMarkTypeClose" value=")">
+												<label for="RadiosMarkTypeClose">
+													CLOSE </label>
+											</div>
+										</div>
+		
+									</fieldset>
+		
+		
+									<fieldset class="dialog__fieldset contact__content" id="MarkId">
+										<label id="EdgeMarkType" for="edgeMarkType" class="contact__label">Mark Id</label>
+										<input type="text" name="edgeMark" value="" id="EdgeMarkInput" class="contact__input" readonly>
+									</fieldset>
+		
+									<fieldset class="dialog__fieldset contact__content" id="NewEdgeAction">
+										<span class="contact__label">Edge Action</span>
+										<div class="InlineStyle PaddingRight">
+											<input class="form-check-input custom-checkbox" type="radio"
+												name="NewEdgeActionValue" id="RadiosAddEdge" value="add" checked>
+											<label for="RadiosAddEdge" id="RadiosAddEdge">
+												Add (multigraph) </label>
+										</div>
+		
+										<div class="InlineStyle PaddingRight">
+											<input class="form-check-input custom-checkbox" type="radio"
+												name="NewEdgeActionValue" id="RadiosReplaceEdge" value="replace">
+											<label for="RadiosReplaceEdge">
+												Replace current </label>
+										</div>
+		
+									</fieldset>
+								</form>
+							</div>
+						</div>
+
+						<div class="dialog__buttons">
+							<button class="button button_wide" id="directedBtn">
+								Create edge
+							</button>
+						</div>
+					</div>
+		
+				</div>
+		
+				<div class="dialog hide" id="changeVertexType">
+					<div class="dialog__content">
+						<div class="dialog__header">
+							<div class="dialog__title">
+								<span>
+									Change vetrex type
+								</span>
+							</div>
+		
+							<button class="button dialog__close"></button>
+						</div>
+		
+						<div class="dialog__body">
+							<form>
+								<fieldset class="dialog__fieldset contact__content" id="EdgeMarkControls">
+									<div class="">
+										<span class="contact__label">Vertex Type</span>
+		
+										<div>
+											<input class="custom-checkbox" type="radio" name="vertexTypeValue"
+												id="defaultVertexType" value="dafault" checked>
+											<label for="defaultVertexType">
+												DEFAULT </label>
+										</div>
+		
+										<div>
+											<input class="custom-checkbox" type="radio" name="vertexTypeValue"
+												id="startVertexType" value="start">
+											<label for="startVertexType">
+												START </label>
+										</div>
+		
+										<div>
+											<input class="custom-checkbox" type="radio" name="vertexTypeValue"
+												id="finishVertexType" value="finish">
+											<label for="finishVertexType">
+												FINISH </label>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+		
+							<div class="dialog__buttons">
+								<button class="button button_wide" id="changeVertexTypeButton">
+									Change type
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!--==================== SCRIPTS ====================-->
+
+	<script src="./js/scripts.js"></script>
+
+</body>
+</html>
